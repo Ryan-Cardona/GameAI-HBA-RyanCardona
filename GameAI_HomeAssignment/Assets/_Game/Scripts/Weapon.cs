@@ -94,23 +94,7 @@ public class Weapon : MonoBehaviour
             DamageableHitbox hitbox = hit.collider.GetComponentInParent<DamageableHitbox>();
             if (hitbox != null)
             {
-                // ADDED: Track target health before damage, so we can detect kills.
-                Health targetHealth = hitbox.GetHealth();
-                float beforeHp = (targetHealth != null) ? targetHealth.CurrentHealth : 0f;
-
                 hitbox.ApplyDamage(damage);
-
-                // ADDED: If this shooter is a Gladiator ML-Agent, reward hit/kill.
-                GladiatorAgent ga = GetComponentInParent<GladiatorAgent>();
-                if (ga != null)
-                {
-                    ga.RewardHitEnemy();
-
-                    if (targetHealth != null && beforeHp > 0f && targetHealth.IsDead)
-                    {
-                        ga.RewardKillEnemy();
-                    }
-                }
             }
 
             // Stop at the first non-self thing we hit (wall or enemy)

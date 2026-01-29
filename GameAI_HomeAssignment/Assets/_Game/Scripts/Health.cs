@@ -58,13 +58,6 @@ public class Health : MonoBehaviour
 
         OnDied?.Invoke(this);
 
-        // ADDED: If this object is a Gladiator ML-Agent, punish its death.
-        GladiatorAgent ga = GetComponent<GladiatorAgent>();
-        if (ga != null)
-        {
-            ga.PunishDeath();
-        }
-
         // Disable the agent object.
         // Later we implement respawn or ragdoll or pooling.
         if (destroyOnDeath)
